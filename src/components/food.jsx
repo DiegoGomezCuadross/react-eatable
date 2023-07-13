@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import foodImage from "../images/food.svg";
+import Trash from "../images/delete-bin-fill.svg";
+import Edit from "../images/edit-box-fill.svg";
 
 const ContainerCard = styled.div`
   width: 156px;
@@ -15,7 +16,13 @@ const ContainerText = styled.div`
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin: 0 13px 0 13px;
+  position: relative;
+  top: -155px;
+  gap: 8px;
+  margin-bottom: 18px;
+  width: 156px;
+  height: 212px;
+  justify-content: flex-end;
 `;
 
 const ContainerTitle = styled.div`
@@ -27,7 +34,7 @@ const ContainerTitle = styled.div`
   position: relative;
   font-size: 22px;
   font-weight: 600;
-  top: -46px;
+  line-height: normal;
 `;
 const ContainerPrice = styled.div`
   color: var(--orange, #fa4a0c);
@@ -35,7 +42,6 @@ const ContainerPrice = styled.div`
   font-size: 22px;
   font-weight: 600;
   position: relative;
-  top: -56px;
 `;
 
 const Image = styled.img`
@@ -43,20 +49,49 @@ const Image = styled.img`
   height: 130px;
   flex-shrink: 0;
   position: relative;
-  top: -40px;
+  top: -55px;
   object-fit: cover;
   margin: 0 13px 13px;
   border-radius: 130px;
   filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.2));
 `;
-function Food() {
+
+const Icon = styled.img`
+  width: 16px;
+  height: 16px;
+`;
+
+const ContainerIcon = styled.div`
+  display: flex;
+  padding: 0px 16px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+`;
+function Food(food) {
   return (
     <div style={{ height: "250px" }}>
       <ContainerCard>
-        <Image src={foodImage} alt="Food image" />
+        <Image src={food.picture_url} alt="Food image" />
         <ContainerText>
-          <ContainerTitle>Nueva comida</ContainerTitle>
-          <ContainerPrice>$123</ContainerPrice>
+          <div style={{ width: "130px", height: "auto" }}>
+            <ContainerTitle>{food.name}</ContainerTitle>
+          </div>
+          <div style={{ width: "auto", height: "auto" }}>
+            <ContainerPrice>${(food.price / 100).toFixed(2)}</ContainerPrice>
+          </div>
+          <ContainerIcon>
+            <Icon
+              src={Trash}
+              alt="Trash image"
+              style={{ width: "16px", height: "16px" }}
+            />
+            <Icon
+              src={Edit}
+              alt="Edit image"
+              style={{ width: "16px", height: "16px" }}
+            />
+          </ContainerIcon>
         </ContainerText>
       </ContainerCard>
     </div>

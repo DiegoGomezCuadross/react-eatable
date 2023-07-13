@@ -4,20 +4,12 @@ import { CiUser } from "react-icons/ci";
 
 const ContainerFooter = styled.footer`
   bottom: 0;
-  background: white;
-  height: 80px;
+  background: #d1d5db;
+  height: 100px;
   display: flex;
   align-items: center;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-`;
-
-const ContainerIcon = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-left: 120px;
-  margin-right: 120px;
 `;
 const Icon = styled.div`
   width: 30px;
@@ -32,17 +24,26 @@ const Icon = styled.div`
     border-radius: 50%;
   }
 `;
+
+const Button = styled.button`
+  color: #fff;
+  display: flex;
+  width: 310px;
+  height: 70px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  background: var(--orange, #fa4a0c);
+  border: none;
+  margin: auto;
+`;
 function Footer() {
   return (
     <ContainerFooter>
-      <ContainerIcon>
-        <Icon>
-          <LiaHomeSolid style={{ width: "30px", height: "30px" }} />
-        </Icon>
-        <Icon>
-          <CiUser style={{ width: "30px", height: "30px" }} />
-        </Icon>
-      </ContainerIcon>
+      <Button>Create Product</Button>
     </ContainerFooter>
   );
 }
