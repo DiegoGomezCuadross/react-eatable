@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
 import Food from "../components/food";
 import Footer from "../components/footer";
+import { getProducts } from "../services/products-service";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   max-width: 414px;
   max-height: 896px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 45px;
+  padding-top: 1px;
   background: #d1d5db;
   border-radius: 20px;
 `;
@@ -19,47 +21,35 @@ const ContainerCard = styled.div`
   margin-left: 30px;
   max-height: 535px;
   overflow: auto;
-  padding-top: 40px;
+  padding-top: 64px;
 `;
 function HomeFoodPage() {
-  // const [filters, setFilters] = useState({
-  //   category: "italian",
-  //   minprice: 0,
-  //   maxprice: 1000000000,
-  // });
-  // const italian = [];
-  // const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState(null);
 
-  // function FilterFoods(category) {
-  //   let foods = products?.filter((product) => product.category === category);
-
-  //   console.log(foods);
-  // }
-  // useEffect(() => {
-  //   getProducts().then(setProducts).catch(console.log);
-  // }, []);
-  // console.log(products);
-
-  // function toggleFilter(newValue, prop) {
-  //   let newValues;
-
-  //   if (filters[prop].includes(newValue)) {
-  //     newValues = filters[prop].filter((value) => value !== newValue);
-  //   } else {
-  //     newValues = [...filters[prop], newValue];
-  //   }
-  //   newValues = { ...filters, prop };
-  //   setFilters(newValues);
-  // }
+  useEffect(() => {
+    getProducts().then(setProducts).catch(console.log);
+  }, []);
+  console.log(products);
 
   return (
     <Container>
-      <h1>Products Dashboard</h1>
+      <h1
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "48px",
+          marginBottom: "32px",
+          fontSize: "22px",
+          fontWeight: "600",
+          lineHeight: "normal",
+        }}
+      >
+        Products Dashboard
+      </h1>
       <ContainerCard>
-        <Food />
-        {/* <{products?.map((product) => {
+        {products?.map((product) => {
           return <Food key={product.id} {...product}></Food>;
-        })}> */}
+        })}
       </ContainerCard>
       <Footer />
     </Container>
