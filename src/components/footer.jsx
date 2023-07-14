@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 const ContainerFooter = styled.footer`
   bottom: 0;
-  background: #d1d5db;
+  background: #f4f4f7;
   height: 100px;
   display: flex;
   align-items: center;
@@ -38,13 +38,12 @@ const Button = styled.button`
   border: none;
   cursor: pointer;
   text-decoration: none;
+  color: white;
 `;
 function Footer({ props, color = "#fa4a0c" }) {
   return (
     <ContainerFooter>
-      <Button style={{ background: color, textDecoration: "none" }}>
-        {props}
-      </Button>
+      <Button style={{ background: color }}>{props}</Button>
     </ContainerFooter>
   );
 }

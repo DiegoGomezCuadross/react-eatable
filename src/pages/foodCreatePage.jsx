@@ -7,18 +7,19 @@ import { Label, Input } from "./foodEditPage";
 
 const Container = styled.div`
   max-width: 414px;
-  max-height: 747px;
+  min-height: 896px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 45px;
-  background: #d1d5db;
+  background: #f4f4f7;
+
   border-radius: 20px;
 `;
 
 const Form = styled.form`
   display: flex;
   width: 414px;
-  padding: 32px 32px 203px 32px;
+  padding: 0px 32px 0px 32px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
@@ -99,7 +100,7 @@ function FoodCreatePage() {
           name="picture_url"
           value={picture_url}
           onChange={handleChange}
-          style={{ marginBottom: "154px" }}
+          style={{ marginBottom: "296px" }}
         />
         <Footer props={"Create"} />
       </Form>

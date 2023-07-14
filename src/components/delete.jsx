@@ -52,15 +52,3 @@ function DeleteProduct({ onYesClick, onNoClick }) {
   );
 }
 export default DeleteProduct;
-
-// style={{
-//             display: "flex",
-//             width: "262px",
-//             padding: "12px 16px",
-//             justifyContent: "center",
-//             alignItems: "center",
-//             gap: "10px",
-//             borderRadius: "30px",
-//             background: "#FA4A0C",
-//             border: "none",
-//           }}
