@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Trash from "../images/delete-bin-fill.svg";
 import Edit from "../images/edit-box-fill.svg";
+import { Link } from "react-router-dom";
 
 const ContainerCard = styled.div`
   width: 156px;
@@ -17,11 +18,11 @@ const ContainerText = styled.div`
   align-items: center;
   gap: 8px;
   position: relative;
-  top: -155px;
+  top: -101px;
   gap: 8px;
   margin-bottom: 18px;
   width: 156px;
-  height: 212px;
+  height: 158px;
   justify-content: flex-end;
 `;
 
@@ -72,7 +73,9 @@ function Food(food) {
   return (
     <div style={{ height: "250px" }}>
       <ContainerCard>
-        <Image src={food.picture_url} alt="Food image" />
+        <Link to={`/products/${food.id}`}>
+          <Image src={food.picture_url} alt="Food image" />
+        </Link>
         <ContainerText>
           <div style={{ width: "130px", height: "auto" }}>
             <ContainerTitle>{food.name}</ContainerTitle>

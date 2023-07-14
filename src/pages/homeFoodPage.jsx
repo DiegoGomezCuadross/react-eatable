@@ -20,7 +20,7 @@ const ContainerCard = styled.div`
   margin-right: 30px;
   margin-left: 30px;
   max-height: 535px;
-  overflow: auto;
+  overflow-y: auto;
   padding-top: 64px;
 `;
 function HomeFoodPage() {
@@ -51,7 +51,7 @@ function HomeFoodPage() {
           return <Food key={product.id} {...product}></Food>;
         })}
       </ContainerCard>
-      <Footer />
+      <Footer props={"Create Product"} />
     </Container>
   );
 }

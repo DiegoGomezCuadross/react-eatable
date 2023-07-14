@@ -4,6 +4,7 @@ import { showProduct } from "../services/products-service";
 import { useEffect, useState } from "react";
 import Footer from "../components/footer";
 import { Link } from "react-router-dom";
+import Input from "../components/input";
 
 const Container = styled.div`
   max-width: 414px;
@@ -56,7 +57,16 @@ const ImageFood = styled.img`
   filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.2));
 `;
 
-function FoodDetailPage() {
+const Form = styled.form`
+  display: flex;
+  width: 414px;
+  padding: 32px 32px 203px 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+`;
+
+function FoodCreatePage() {
   const { id } = useParams();
 
   const [products, setProducts] = useState(null);
@@ -71,20 +81,61 @@ function FoodDetailPage() {
 
   return (
     <Container>
-      <ImageFood src={products.picture_url} alt="image-food" />
-      <ContainerNamePrice>
-        <NameFood>{products.name}</NameFood>
-        <Price>${(products.price / 100).toFixed(2)}</Price>
-      </ContainerNamePrice>
-      <ContainerDescription>
-        <h3>Description</h3>
-        <p>{products.description}</p>
-      </ContainerDescription>
+      <h1
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "48px",
+          marginBottom: "32px",
+          fontSize: "22px",
+          fontWeight: "600",
+          lineHeight: "normal",
+        }}
+      >
+        Create Product
+      </h1>
+      <Form>
+        <Input
+          id="name"
+          name="name"
+          label={"Name"}
+          type="text"
+          placeholder=""
+        ></Input>
+        <Input
+          id="price"
+          name="price"
+          label={"Price"}
+          type="number"
+          placeholder=""
+        ></Input>
+        <Input
+          id="description"
+          name="description"
+          label={"Description"}
+          type="text"
+          placeholder=""
+        ></Input>
+        <Input
+          id="category"
+          name="category"
+          label={"Category"}
+          type="text"
+          placeholder=""
+        ></Input>
+        <Input
+          id="picture_url"
+          name="picture"
+          label={"Picture URL"}
+          type="text"
+          placeholder=""
+        ></Input>
+      </Form>
       <Link to={`/products`}>
-        <Footer props={"Go Back"} />
+        <Footer props={"Create"} />
       </Link>
     </Container>
   );
 }
 
-export default FoodDetailPage;
+export default FoodCreatePage;

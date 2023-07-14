@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import { LiaHomeSolid } from "react-icons/lia";
-import { CiUser } from "react-icons/ci";
 
 const ContainerFooter = styled.footer`
   bottom: 0;
@@ -26,7 +24,6 @@ const Icon = styled.div`
 `;
 
 const Button = styled.button`
-  color: #fff;
   display: flex;
   width: 310px;
   height: 70px;
@@ -36,14 +33,17 @@ const Button = styled.button`
   gap: 10px;
   flex-shrink: 0;
   border-radius: 30px;
-  background: var(--orange, #fa4a0c);
-  border: none;
   margin: auto;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
 `;
-function Footer() {
+function Footer({ props, color = "#fa4a0c" }) {
   return (
     <ContainerFooter>
-      <Button>Create Product</Button>
+      <Button style={{ background: color, textDecoration: "none" }}>
+        {props}
+      </Button>
     </ContainerFooter>
   );
 }
