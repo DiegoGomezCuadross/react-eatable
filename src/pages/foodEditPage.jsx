@@ -1,14 +1,12 @@
 import styled from "@emotion/styled";
-import { useParams } from "react-router-dom";
-import { showProduct } from "../services/products-service";
+import { showProduct, updateProduct } from "../services/products-service";
 import { useEffect, useState } from "react";
 import Footer from "../components/footer";
-import { Link } from "react-router-dom";
-import Input from "../components/input";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 414px;
-  max-height: 896px;
+  max-height: 747px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 45px;
@@ -58,25 +56,62 @@ const ImageFood = styled.img`
 `;
 
 const Form = styled.form`
-  display: flex;
-  width: 414px;
-  padding: 32px 32px 203px 32px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
+  max-width: 414px;
+  max-height: 747px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 45px;
+  background: #d1d5db;
+  border-radius: 20px;
+  padding: 32px 32px 120px 32px;
+`;
+export const Input = styled.input`
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 2px solid gray;
+  outline: none;
 `;
 
+export const Label = styled.label`
+  font-size: 14px;
+  font-weight: 600;
+  color: #b8b8bb;
+`;
 function FoodEditPage() {
   const { id } = useParams();
 
-  const [products, setProducts] = useState(null);
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    name: "",
+    price: "",
+    category: "food",
+    picture_url: "",
+    description: "",
+  });
+
+  const { name, price, picture_url, description } = formData;
 
   useEffect(() => {
-    showProduct(id).then(setProducts).catch(console.log);
+    showProduct(id).then(setFormData).catch(console.log);
   }, []);
 
-  if (!products) {
-    return <div>Loading...</div>; // Muestra un mensaje de carga mientras se obtienen los datos
+  console.log(id);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      await updateProduct(id, formData);
+      navigate("/products");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -94,46 +129,34 @@ function FoodEditPage() {
       >
         Edit Product
       </h1>
-      <Form>
+      <Form onSubmit={handleSubmit}>
+        <Label>Name</Label>
         <Input
-          id="name"
+          type="text"
           name="name"
-          label={"Name"}
+          placeholder=""
+          value={name}
+          onChange={handleChange}
+        />
+        <Label>Price</Label>
+        <Input type="text" name="price" value={price} onChange={handleChange} />
+        <Label>Description</Label>
+        <Input
           type="text"
-          placeholder=""
-        ></Input>
-        <Input
-          id="price"
-          name="price"
-          label={"Price"}
-          type="number"
-          placeholder=""
-        ></Input>
-        <Input
-          id="description"
           name="description"
-          label={"Description"}
-          type="text"
-          placeholder=""
-        ></Input>
+          value={description}
+          onChange={handleChange}
+        />
+        <Label>Picture URl</Label>
         <Input
-          id="category"
-          name="category"
-          label={"Category"}
           type="text"
-          placeholder=""
-        ></Input>
-        <Input
-          id="picture_url"
-          name="picture"
-          label={"Picture URL"}
-          type="text"
-          placeholder=""
-        ></Input>
-      </Form>
-      <Link to={`/products`}>
+          name="picture_url"
+          value={picture_url}
+          onChange={handleChange}
+          style={{ marginBottom: "154px" }}
+        />
         <Footer props={"Save"} />
-      </Link>
+      </Form>
     </Container>
   );
 }

@@ -8,6 +8,7 @@ const ContainerFooter = styled.footer`
   align-items: center;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  margin: auto;
 `;
 const Icon = styled.div`
   width: 30px;

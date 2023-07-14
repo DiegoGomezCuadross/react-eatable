@@ -69,7 +69,7 @@ const ContainerIcon = styled.div`
   align-items: center;
   align-self: stretch;
 `;
-function Food(food) {
+function Food({ food, onDeleteClick }) {
   return (
     <div style={{ height: "250px" }}>
       <ContainerCard>
@@ -84,16 +84,20 @@ function Food(food) {
             <ContainerPrice>${(food.price / 100).toFixed(2)}</ContainerPrice>
           </div>
           <ContainerIcon>
-            <Icon
-              src={Trash}
-              alt="Trash image"
-              style={{ width: "16px", height: "16px" }}
-            />
-            <Icon
-              src={Edit}
-              alt="Edit image"
-              style={{ width: "16px", height: "16px" }}
-            />
+            <div onClick={onDeleteClick}>
+              <Icon
+                src={Trash}
+                alt="Trash image"
+                style={{ width: "16px", height: "16px", cursor: "pointer" }}
+              />
+            </div>
+            <Link to={`/products/edit/${food.id}`}>
+              <Icon
+                src={Edit}
+                alt="Edit image"
+                style={{ width: "16px", height: "16px" }}
+              />
+            </Link>
           </ContainerIcon>
         </ContainerText>
       </ContainerCard>

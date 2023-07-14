@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
 import Food from "../components/food";
 import Footer from "../components/footer";
-import { getProducts } from "../services/products-service";
+import { getProducts, deleteProduct } from "../services/products-service";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import DeleteProduct from "../components/delete";
 
 const Container = styled.div`
   max-width: 414px;
@@ -13,6 +15,20 @@ const Container = styled.div`
   background: #d1d5db;
   border-radius: 20px;
 `;
+
+const Modal = styled.div`
+  position: absolute;
+  position: absolute;
+  top: 0px;
+  background-color: rgb(23 23 23 / 75%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 414px;
+  height: 747px;
+  border-radius: 20px;
+`;
+
 const ContainerCard = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -20,16 +36,47 @@ const ContainerCard = styled.div`
   margin-right: 30px;
   margin-left: 30px;
   max-height: 535px;
-  overflow-y: auto;
   padding-top: 64px;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    width: 10px; /* width of the entire scrollbar */
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: none; /* color of the scroll thumb */
+    border-radius: 10px; /* roundness of the scroll thumb */
+    /* border: 3px solid orange; creates padding around scroll thumb */
+  }
 `;
 function HomeFoodPage() {
   const [products, setProducts] = useState(null);
+  const [isOpenDelModel, setIsOpenDelModel] = useState(false);
+  const [productIdDelete, setProductIdDelete] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProducts().then(setProducts).catch(console.log);
   }, []);
-  console.log(products);
+
+  function handleDeleteClick(id) {
+    setIsOpenDelModel(true);
+    setProductIdDelete(id);
+  }
+
+  function handleCloseModal(event) {
+    event.preventDefault();
+    setIsOpenDelModel(false);
+  }
+
+  async function handleDeleteProduct() {
+    try {
+      await deleteProduct(productIdDelete);
+    } catch (error) {
+      console.log(error);
+    }
+    setIsOpenDelModel(false);
+    navigate("/products");
+  }
 
   return (
     <Container>
@@ -47,11 +94,28 @@ function HomeFoodPage() {
         Products Dashboard
       </h1>
       <ContainerCard>
-        {products?.map((product) => {
-          return <Food key={product.id} {...product}></Food>;
+        {products?.map((food, index) => {
+          return (
+            <Food
+              onDeleteClick={() => handleDeleteClick(food.id)}
+              food={food}
+              key={`pro${index}`}
+            />
+          );
         })}
       </ContainerCard>
-      <Footer props={"Create Product"} />
+      <div></div>
+      <Link to={`/create`}>
+        <Footer props={"Create Product"} />
+      </Link>
+      {isOpenDelModel ? (
+        <Modal>
+          <DeleteProduct
+            onYesClick={handleDeleteProduct}
+            onNoClick={handleCloseModal}
+          ></DeleteProduct>
+        </Modal>
+      ) : null}
     </Container>
   );
 }

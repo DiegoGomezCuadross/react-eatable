@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 414px;
-  max-height: 896px;
+  max-height: 747px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 45px;
