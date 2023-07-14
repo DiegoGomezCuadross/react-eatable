@@ -1,31 +1,18 @@
 import styled from "@emotion/styled";
+import { useParams } from "react-router-dom";
+import { showProduct } from "../services/products-service";
+import { useEffect, useState } from "react";
 import Footer from "../components/footer";
-import foodImage from "../images/food.svg";
-import backImage from "../images/chevron-left.svg";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 414px;
-  max-height: 896px;
+  max-height: 747px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 45px;
   background: #d1d5db;
   border-radius: 20px;
-`;
-
-const Button = styled.button`
-  display: flex;
-  width: 310px;
-  height: 70px;
-  padding: 12px 16px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 30px;
-  background: var(--orange, #fa4a0c);
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: auto;
 `;
 
 const ContainerDescription = styled.div`
@@ -68,35 +55,34 @@ const ImageFood = styled.img`
   fill: #fff;
   filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.2));
 `;
-const ImageBack = styled.img`
-  margin-left: 41px;
-  margin-bottom: 19px;
-  cursor: pointer;
 
-  &:hover {
-    background: rgba(215, 100, 0, 0.4);
-    box-shadow: 0px 0px 5px 5px rgba(215, 56, 0, 0.4);
-    border-radius: 50%;
-  }
-`;
 function FoodDetailPage() {
+  const { id } = useParams();
+
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    showProduct(id).then(setProducts).catch(console.log);
+  }, []);
+
+  if (!products) {
+    return <div>Loading...</div>; // Muestra un mensaje de carga mientras se obtienen los datos
+  }
+
   return (
     <Container>
-      <ImageBack src={backImage} alt="back-image" />
-      <ImageFood src={foodImage} alt="image-food" />
+      <ImageFood src={products.picture_url} alt="image-food" />
       <ContainerNamePrice>
-        <NameFood>Pasta Dish</NameFood>
-        <Price>$15.45</Price>
+        <NameFood>{products.name}</NameFood>
+        <Price>${(products.price / 100).toFixed(2)}</Price>
       </ContainerNamePrice>
       <ContainerDescription>
         <h3>Description</h3>
-        <p>
-          Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi welsh
-          onion daikon amaranth tatsoi tomatillo melon azuki bean garlic.
-        </p>
+        <p>{products.description}</p>
       </ContainerDescription>
-      <Button>Go Back</Button>
-      <Footer />
+      <Link to={`/products`}>
+        <Footer props={"Go Back"} />
+      </Link>
     </Container>
   );
 }

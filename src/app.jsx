@@ -1,5 +1,9 @@
+import { Route, Routes, Navigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import HomeFoodPage from "./pages/homeFoodPage";
+import DetailFood from "./pages/foodDetailPage";
+import CreateFood from "./pages/foodCreatePage";
+import EditFood from "./pages/foodEditPage";
 
 const Container = styled.div`
   max-width: 414px;
@@ -17,7 +21,19 @@ function App() {
   // );
   return (
     <Container>
-      <HomeFoodPage />
+      <Routes>
+        <Route path="/">
+          <Route index element={<Navigate to="/products" replace={true} />} />
+          <Route path="products" element={<HomeFoodPage />} />
+          <Route path="products/:id" element={<DetailFood />} />
+          <Route path="create" element={<CreateFood />} />
+          <Route path="products/edit/:id" element={<EditFood />} />
+          <Route
+            path="*"
+            element={<Navigate to="/products" replace={true} />}
+          />
+        </Route>
+      </Routes>
     </Container>
   );
 }
