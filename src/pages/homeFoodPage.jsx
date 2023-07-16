@@ -12,7 +12,7 @@ const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding-top: 1px;
-  background: #d1d5db;
+  background: #f4f4f7;
   border-radius: 20px;
 `;
 
@@ -35,7 +35,7 @@ const ContainerCard = styled.div`
   gap: 20px;
   margin-right: 30px;
   margin-left: 30px;
-  max-height: 535px;
+  max-height: 694px;
   padding-top: 64px;
   overflow: scroll;
   ::-webkit-scrollbar {
@@ -84,7 +84,7 @@ function HomeFoodPage() {
         style={{
           display: "flex",
           justifyContent: "center",
-          marginTop: "48px",
+          marginTop: "40px",
           marginBottom: "32px",
           fontSize: "22px",
           fontWeight: "600",

@@ -7,11 +7,11 @@ import { Link } from "react-router-dom";
 
 const Container = styled.div`
   max-width: 414px;
-  max-height: 747px;
+  min-height: 896px;
   margin-left: auto;
   margin-right: auto;
   padding-top: 45px;
-  background: #d1d5db;
+  background: #f4f4f7;
   border-radius: 20px;
 `;
 
@@ -24,7 +24,7 @@ const ContainerDescription = styled.div`
   font-weight: 400;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 91px;
+  margin-bottom: 105px;
   margin-top: 27px;
 `;
 const Price = styled.p`
