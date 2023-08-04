@@ -1,1 +1,10 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/XCrKMJ5D)
+## Resources
+
+- Design: **[here](https://www.figma.com/file/2zBMKn5AX6hYydkRKnyZIo/Eatable-Filters?node-id=0-1&t=s7o4ypgZdOGap8Lb-0)**
+- API endpoint: https://codeable-eatable-api.herokuapp.com
+- Backend: **[here](https://github.com/codeableorg/eatable-api)** (includes insomnia json file)
+
+## Eatable - Food for Everyone
+
+Eats Inc. is developing a new idea in the food-tech industry: "Eatable". They have hired your team to build an MVP for the web app. The stakes are high and the time is short but you and your team are confident in your abilities to finish on time.
+
